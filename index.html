@@ -140,22 +140,41 @@
       color: var(--accent);
     }
     /* ── Headshot ── */
-    .headshot {
+    .headshot-wrap {
       position: fixed;
-      right: 3.5rem;
-      top: 40%;
-      transform: translateY(-40%);
-      width: 160px;
-      height: auto;
+      right: 8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 200px;
+    }
+
+    .headshot-rect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      aspect-ratio: 2316 / 3088;
+      background: #ffffff;
+    }
+
+    .headshot {
+      position: relative;
+      top: 12px;
+      left: 12px;
+      width: 100%;
       aspect-ratio: 2316 / 3088;
       object-fit: cover;
-      border-radius: 4px;
+      display: block;
+      border-radius: 0;
     }
   </style>
 </head>
 <body>
 
-  <img class="headshot" src="/headshot.JPG" alt="Harshul Basava" />
+  <div class="headshot-wrap">
+    <div class="headshot-rect"></div>
+    <img class="headshot" src="/headshot.JPG" alt="Harshul Basava" />
+  </div>
 
   <div class="links-menu">
     <button class="links-toggle" id="toggle" aria-label="Toggle links">
