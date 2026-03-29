@@ -139,9 +139,23 @@
       left: 0;
       color: var(--accent);
     }
+    /* ── Headshot ── */
+    .headshot {
+      position: fixed;
+      right: 3.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 160px;
+      height: auto;
+      aspect-ratio: 2316 / 3088;
+      object-fit: cover;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
+
+  <img class="headshot" src="/headshot.jpg" alt="Harshul Basava" />
 
   <div class="links-menu">
     <button class="links-toggle" id="toggle" aria-label="Toggle links">
