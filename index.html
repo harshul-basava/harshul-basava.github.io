@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harshul Basava</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f7f4;
+      --ink: #1a1814;
+      --muted: #8a857c;
+      --accent: #2d5a3d;
+      --line: #e2ded8;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 3rem 1.5rem;
+    }
+
+    main {
+      max-width: 520px;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: rise 0.7s ease forwards;
+      animation-delay: 0.1s;
+    }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
+    }
+
+    .divider {
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 1.4rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #3a3630;
+      margin-bottom: 2.4rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Harshul Basava</h1>
+    <div class="divider"></div>
+    <p>Student and AI safety organizer at Georgia Tech.</p>
+    <nav>
+      <a href="#" target="_blank" rel="noopener">Resume</a>
+      <a href="#" target="_blank" rel="noopener">Substack</a>
+      <a href="#" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </main>
+</body>
+</html>
