@@ -118,29 +118,6 @@
       line-height: 1.7;
       color: #ffffff;
     }
-    /* ── Cal.com floating button override ── */
-    [data-cal-float-button] {
-      font-family: 'Geist Mono', monospace !important;
-      font-size: 0.78rem !important;
-      font-weight: 300 !important;
-      letter-spacing: 0.08em !important;
-      text-transform: uppercase !important;
-      background: none !important;
-      border: none !important;
-      box-shadow: none !important;
-      color: var(--muted) !important;
-      padding: 0 !important;
-      border-radius: 0 !important;
-      transition: color 0.2s !important;
-    }
-    [data-cal-float-button]:hover {
-      color: var(--accent) !important;
-      background: none !important;
-    }
-    [data-cal-float-button] svg,
-    [data-cal-float-button] img {
-      display: none !important;
-    }
   </style>
 </head>
 <body>
@@ -156,6 +133,7 @@
       <a href="#" target="_blank" rel="noopener">Resume</a>
       <a href="#" target="_blank" rel="noopener">Substack</a>
       <a href="#" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" id="meet-link">Meet</a>
     </nav>
   </div>
 
@@ -183,8 +161,17 @@
   <script type="text/javascript">
     (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
     Cal("init", "mtg", {origin:"https://app.cal.com"});
-    Cal.ns.mtg("floatingButton", {"calLink":"harshulb/mtg","config":{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}, "buttonText": "Meet", "buttonPosition": "bottom-left"});
     Cal.ns.mtg("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+
+    // Hide Cal's default floating button, use our own Meet link
+    document.addEventListener("DOMContentLoaded", () => {
+      // Suppress the floating button by not calling floatingButton
+      const meetLink = document.getElementById("meet-link");
+      meetLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        Cal.ns.mtg("modal", {"calLink":"harshulb/mtg","config":{"layout":"month_view"}});
+      });
+    });
   </script>
   <!-- Cal floating-popup embed code ends -->
 </body>
