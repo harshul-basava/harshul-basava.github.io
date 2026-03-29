@@ -117,6 +117,27 @@
       font-size: 0.95rem;
       line-height: 1.7;
       color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .sub-items {
+      list-style: none;
+      margin-top: 0.3rem;
+    }
+
+    .sub-items li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .sub-items li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
     }
   </style>
 </head>
@@ -140,8 +161,12 @@
   <main>
     <h1>Harshul Basava</h1>
     <p class="email">harshul [at] gatech [dot] edu</p>
+    <p>Student and AI safety organizer at Georgia Tech.</p>
+    <ul class="sub-items">
+      <li>co-director of operations at <a href="https://aisi.dev" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none;">AI safety initiative</a></li>
+      <li><a href="https://sparai.org" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none;">SPAR</a> mentee researching generalization</li>
+    </ul>
 
-  </main>
 
   <script>
     const toggle = document.getElementById('toggle');
