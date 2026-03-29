@@ -29,8 +29,8 @@
     /* ── Top-right links menu ── */
     .links-menu {
       position: fixed;
-      top: 1.5rem;
-      right: 1.8rem;
+      top: 6.2rem;
+      right: 3.5rem;
       z-index: 100;
     }
 
@@ -42,14 +42,17 @@
       padding: 0.3rem;
       display: flex;
       align-items: center;
+      justify-content: flex-end;
+      width: 100%;
       transition: color 0.2s;
     }
 
     .links-toggle:hover { color: var(--accent); }
+    .links-toggle.active { color: #ffffff; }
 
     .links-toggle svg {
-      width: 22px;
-      height: 22px;
+      width: 28px;
+      height: 28px;
     }
 
     .links-dropdown {
@@ -91,7 +94,7 @@
     /* ── Main content ── */
     main {
       max-width: 520px;
-      padding-top: 6rem;
+      padding-top: 3rem;
     }
 
     h1 {
@@ -142,10 +145,14 @@
   <script>
     const toggle = document.getElementById('toggle');
     const dropdown = document.getElementById('dropdown');
-    toggle.addEventListener('click', () => dropdown.classList.toggle('open'));
+    toggle.addEventListener('click', () => {
+      dropdown.classList.toggle('open');
+      toggle.classList.toggle('active');
+    });
     document.addEventListener('click', (e) => {
       if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
         dropdown.classList.remove('open');
+        toggle.classList.remove('active');
       }
     });
   </script>
