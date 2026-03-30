@@ -23,9 +23,16 @@
       color: var(--ink);
       font-family: 'Geist', sans-serif;
       min-height: 100vh;
+      min-width: 860px;
       padding: 3rem 3.5rem;
       display: flex;
       align-items: stretch;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        min-width: unset;
+      }
     }
 
     /* ── Top-right links menu ── */
