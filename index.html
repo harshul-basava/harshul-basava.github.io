@@ -29,7 +29,7 @@
     /* ── Top-right links menu ── */
     .links-menu {
       position: fixed;
-      top: 6.2rem;
+      top: 2rem;
       right: 3.5rem;
       z-index: 100;
     }
@@ -139,42 +139,62 @@
       left: 0;
       color: var(--accent);
     }
-    /* ── Headshot ── */
+
+    /* ── Headshot — desktop: fixed ── */
     .headshot-wrap {
       position: fixed;
       right: 16rem;
       top: 45%;
       transform: translateY(-50%);
-      width: 400px;
+      width: 200px;
+      height: calc(200px * 3088 / 2316 + 12px);
     }
 
     .headshot-rect {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      aspect-ratio: 2316 / 3088;
+      width: 200px;
+      height: calc(200px * 3088 / 2316);
       background: #ffffff;
     }
 
     .headshot {
-      position: relative;
+      position: absolute;
       top: 12px;
       left: 12px;
-      width: 100%;
-      aspect-ratio: 2316 / 3088;
+      width: 200px;
+      height: calc(200px * 3088 / 2316);
       object-fit: cover;
       display: block;
       border-radius: 0;
     }
+
+    /* ── Responsive: drop below text on narrow screens ── */
+    @media (max-width: 900px) {
+      .headshot-wrap {
+        position: relative;
+        transform: none;
+        top: auto;
+        right: auto;
+        width: 160px;
+        height: calc(160px * 3088 / 2316 + 12px);
+        margin-top: 2.5rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .headshot-rect {
+        width: 160px;
+        height: calc(160px * 3088 / 2316);
+      }
+      .headshot {
+        width: 160px;
+        height: calc(160px * 3088 / 2316);
+      }
+    }
   </style>
 </head>
 <body>
-
-  <div class="headshot-wrap">
-    <div class="headshot-rect"></div>
-    <img class="headshot" src="/headshot.JPG" alt="Harshul Basava" />
-  </div>
 
   <div class="links-menu">
     <button class="links-toggle" id="toggle" aria-label="Toggle links">
@@ -200,6 +220,11 @@
       <li><a href="https://sparai.org" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none;">SPAR</a> mentee researching generalization</li>
     </ul>
 
+    <div class="headshot-wrap">
+      <div class="headshot-rect"></div>
+      <img class="headshot" src="/headshot.JPG" alt="Harshul Basava" />
+    </div>
+  </main>
 
   <script>
     const toggle = document.getElementById('toggle');
@@ -220,10 +245,7 @@
     (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
     Cal("init", "mtg", {origin:"https://app.cal.com"});
     Cal.ns.mtg("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-
-    // Hide Cal's default floating button, use our own Meet link
     document.addEventListener("DOMContentLoaded", () => {
-      // Suppress the floating button by not calling floatingButton
       const meetLink = document.getElementById("meet-link");
       meetLink.addEventListener("click", (e) => {
         e.preventDefault();
