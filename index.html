@@ -24,6 +24,8 @@
       font-family: 'Geist', sans-serif;
       min-height: 100vh;
       padding: 3rem 3.5rem;
+      display: flex;
+      align-items: stretch;
     }
 
     /* ── Top-right links menu ── */
@@ -50,10 +52,7 @@
     .links-toggle:hover { color: var(--accent); }
     .links-toggle.active { color: #ffffff; }
 
-    .links-toggle svg {
-      width: 28px;
-      height: 28px;
-    }
+    .links-toggle svg { width: 28px; height: 28px; }
 
     .links-dropdown {
       display: none;
@@ -93,7 +92,8 @@
 
     /* ── Main content ── */
     main {
-      max-width: 520px;
+      flex-shrink: 0;
+      width: 420px;
       padding-top: 3rem;
     }
 
@@ -140,22 +140,27 @@
       color: var(--accent);
     }
 
-    /* ── Headshot — desktop: fixed ── */
+    /* ── Headshot container — takes remaining horizontal space ── */
+    .headshot-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    /* 30% left gap, 50% image, 20% right gap of remaining space */
     .headshot-wrap {
-      position: fixed;
-      right: 16rem;
-      top: 45%;
-      transform: translateY(-50%);
-      width: 200px;
-      height: calc(200px * 3088 / 2316 + 12px);
+      position: relative;
+      width: 85%;
+      margin-left: 8%;
+      aspect-ratio: 2316 / 3088;
     }
 
     .headshot-rect {
       position: absolute;
       top: 0;
       left: 0;
-      width: 200px;
-      height: calc(200px * 3088 / 2316);
+      width: calc(100% - 12px);
+      height: calc(100% - 12px);
       background: #ffffff;
     }
 
@@ -163,33 +168,32 @@
       position: absolute;
       top: 12px;
       left: 12px;
-      width: 200px;
-      height: calc(200px * 3088 / 2316);
+      width: calc(100% - 12px);
+      height: calc(100% - 12px);
       object-fit: cover;
       display: block;
       border-radius: 0;
     }
 
-    /* ── Responsive: drop below text on narrow screens ── */
-    @media (max-width: 900px) {
-      .headshot-wrap {
-        position: relative;
-        transform: none;
-        top: auto;
-        right: auto;
-        width: 160px;
-        height: calc(160px * 3088 / 2316 + 12px);
+    /* ── Responsive: stack below text on narrow screens ── */
+    @media (max-width: 800px) {
+      body {
+        flex-direction: column;
+      }
+
+      main {
+        width: 100%;
+      }
+
+      .headshot-container {
+        justify-content: center;
         margin-top: 2.5rem;
-        margin-left: auto;
-        margin-right: auto;
       }
-      .headshot-rect {
-        width: 160px;
-        height: calc(160px * 3088 / 2316);
-      }
-      .headshot {
-        width: 160px;
-        height: calc(160px * 3088 / 2316);
+
+      .headshot-wrap {
+        width: 260px;
+        margin-left: 0;
+        aspect-ratio: 2316 / 3088;
       }
     }
   </style>
@@ -219,12 +223,14 @@
       <li>co-director of operations at <a href="https://aisi.dev" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none;">AI safety initiative</a></li>
       <li><a href="https://sparai.org" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none;">SPAR</a> mentee researching generalization</li>
     </ul>
+  </main>
 
+  <div class="headshot-container">
     <div class="headshot-wrap">
       <div class="headshot-rect"></div>
       <img class="headshot" src="/headshot.JPG" alt="Harshul Basava" />
     </div>
-  </main>
+  </div>
 
   <script>
     const toggle = document.getElementById('toggle');
