@@ -1,0 +1,324 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #1a3a2a;
+  --ink: #f0ede8;
+  --muted: #9dbfaa;
+  --accent: #7ecba0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  background-color: var(--bg);
+  background-image: url("/background-green.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-family: var(--font-noto-sans-mono), monospace;
+  min-height: 100vh;
+  min-width: 980px;
+  padding: 3rem 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7rem;
+}
+
+@media (max-width: 800px) {
+  body {
+    min-width: unset;
+  }
+}
+
+/* ── Interactive korok scene: anchored to the photo frame ──
+   Nested inside .headshot-wrap, so it fills the photo box and koroks (which can
+   overflow it) track the photo across any monitor size / zoom. Sits above the
+   photo (z 3); pointer-events pass through empty areas so links stay clickable.
+   Edit mode floats it above everything so every korok stays grabbable. */
+.scene {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+  touch-action: none;
+}
+
+.scene.editing {
+  z-index: 9998;
+  pointer-events: auto;
+}
+
+.scene-item {
+  position: absolute;
+  transform-origin: center center;
+  will-change: transform, left, top;
+}
+
+.scene-img {
+  display: block;
+  width: auto;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Selection chrome (edit mode only) */
+.sel-border {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--accent);
+  pointer-events: none;
+}
+
+.sel-handle {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  background: #ffffff;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  cursor: nwse-resize;
+}
+
+.sel-rotate-stem {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  transform-origin: bottom;
+  pointer-events: none;
+}
+
+.sel-rotate {
+  position: absolute;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  cursor: grab;
+}
+
+/* Editor toolbar */
+.scene-toolbar {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 500;
+  background: #0f2419;
+  border: 1px solid var(--muted);
+  border-radius: 6px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: var(--font-noto-sans-mono), monospace;
+  font-size: 0.7rem;
+  color: var(--ink);
+}
+
+.scene-toolbar-row {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.scene-toolbar button {
+  font-family: inherit;
+  font-size: 0.7rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--muted);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.scene-toolbar button:hover {
+  background: var(--accent);
+  color: #0f2419;
+}
+
+.scene-inspector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  border-top: 1px solid var(--muted);
+  padding-top: 0.45rem;
+}
+
+.scene-inspector label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.scene-inspector input {
+  width: 68px;
+  font-family: inherit;
+  font-size: 0.7rem;
+  color: var(--ink);
+  background: #16311f;
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  padding: 0.1rem 0.3rem;
+}
+
+.cursor-tooltip {
+  position: fixed;
+  z-index: 200;
+  transform: translate(14px, 18px);
+  pointer-events: none;
+  background: #0f2419;
+  color: var(--ink);
+  border: 1px solid var(--muted);
+  border-radius: 4px;
+  padding: 0.25rem 0.55rem;
+  font-family: var(--font-noto-sans-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* ── Main content ── */
+main {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  width: 420px;
+  min-width: 420px;
+}
+
+h1 {
+  font-size: 2.8rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+
+.email {
+  font-weight: 300;
+  font-size: 1.25rem;
+  color: var(--muted);
+  margin-bottom: 1.8rem;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.sub-items {
+  list-style: none;
+  margin-top: 0.3rem;
+}
+
+.sub-items li {
+  font-size: 0.98rem;
+  color: var(--muted);
+  line-height: 1.6;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.sub-items li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.sub-items a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.sub-items a:hover {
+  text-decoration: underline;
+}
+
+/* ── Headshot — sized to the photo, sits above the korok layer ── */
+.headshot-container {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headshot-note {
+  margin-top: 0.75rem;
+  width: 100%;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.triforce-icon {
+  width: 0.85em;
+  height: 0.85em;
+  vertical-align: -0.12em;
+  margin: 0 0.15em;
+}
+
+.headshot-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 2316 / 3088;
+}
+
+.headshot-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.headshot {
+  display: block;
+  border-radius: 0;
+}
+
+/* ── Responsive: stack below text on narrow screens ── */
+@media (max-width: 800px) {
+  body {
+    flex-direction: column;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .headshot-container {
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  .headshot-wrap {
+    width: 260px;
+    margin-left: 0;
+    aspect-ratio: 2316 / 3088;
+  }
+}
