@@ -28,15 +28,25 @@ export default function Home() {
             </a>
           </li>
           <li>
-            operations at{" "}
-            <a href="https://secondlookresearch.com" target="_blank" rel="noopener">
-              Second Look
+            <a href="https://sparai.org/projects/f26/recrMjUJvwDNnEZlK/" target="_blank" rel="noopener">
+              mentor
+            </a>
+            ,{" "}
+            <a href="https://openreview.net/forum?id=TqreAmqOzE" target="_blank" rel="noopener">
+              research
+            </a>{" "}
+            at SPAR
+          </li>
+          <li>
+            organizing{" "}
+            <a href="https://dcminiconf.com" target="_blank" rel="noopener">
+              DCMC 2.0
             </a>
           </li>
           <li>
-            research at{" "}
-            <a href="https://sparai.org" target="_blank" rel="noopener">
-              SPAR
+            prev. operations at{" "}
+            <a href="https://secondlookresearch.com" target="_blank" rel="noopener">
+              Second Look
             </a>
           </li>
         </ul>

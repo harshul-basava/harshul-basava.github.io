@@ -75,8 +75,8 @@ const DEFAULT_ITEMS: Item[] = [
   {
     id: "writing",
     src: "/icons/writing.png",
-    label: "Writing",
-    href: "https://substack.com/@hersheysbaklava?utm_campaign=profile&utm_medium=profile-page",
+    label: "Research",
+    href: "https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AERr9JH45IdgazQQL89IRVBVHhrWcjea0PuV6N0YmAjBMnIuJXpxrL86uyAAnQ32G_M2SlhyS_88JFXQCf3Vs9CJ971LQ9LgCPm2HfhCt-4&user=8DEzvssAAAAJ",
     target: "_blank",
     baseHeight: 96,
     x: 27,
