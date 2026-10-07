@@ -35,7 +35,10 @@ export default function Home() {
             <a href="https://openreview.net/forum?id=TqreAmqOzE" target="_blank" rel="noopener">
               research
             </a>{" "}
-            at SPAR
+            at{" "}
+            <a href="https://sparai.org" target="_blank" rel="noopener">
+              SPAR
+            </a>
           </li>
           <li>
             organizing{" "}
