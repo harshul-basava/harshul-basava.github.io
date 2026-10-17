@@ -305,20 +305,47 @@ p {
 @media (max-width: 800px) {
   body {
     flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+    padding: 3rem 1.25rem 3rem;
+    gap: 3.5rem;
+    overflow-x: hidden;
+    /* iOS ignores fixed backgrounds and zooms them instead */
+    background-attachment: scroll;
   }
 
   main {
     width: 100%;
+    min-width: 0;
+    max-width: 420px;
   }
 
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .email {
+    font-size: 1.05rem;
+    margin-bottom: 1.4rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .sub-items li {
+    font-size: 0.92rem;
+  }
+
+  /* Korok positions are px-relative to a 300px photo, so keep that size */
   .headshot-container {
-    justify-content: center;
-    margin-top: 2.5rem;
+    width: 300px;
   }
+}
 
-  .headshot-wrap {
-    width: 260px;
-    margin-left: 0;
-    aspect-ratio: 2316 / 3088;
+/* Very narrow phones: shrink the photo + koroks together */
+@media (max-width: 360px) {
+  .headshot-container {
+    zoom: 0.85;
   }
 }
