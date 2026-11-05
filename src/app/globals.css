@@ -272,7 +272,12 @@ p {
   align-items: center;
 }
 
+/* Note sits below the photo but out of flow, so the container is exactly the
+   photo's height and body's align-items:center centers text on the photo. */
 .headshot-note {
+  position: absolute;
+  top: 100%;
+  left: 0;
   margin-top: 0.75rem;
   width: 100%;
   text-align: center;
