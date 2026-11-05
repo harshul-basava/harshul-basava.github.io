@@ -222,7 +222,7 @@ h1 {
 }
 
 p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.7;
   color: #ffffff;
   margin-bottom: 0.5rem;
@@ -238,7 +238,7 @@ p {
 }
 
 .sub-items li {
-  font-size: 0.98rem;
+  font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.6;
   padding-left: 1rem;
@@ -334,11 +334,11 @@ p {
   }
 
   p {
-    font-size: 1rem;
+    font-size: 0.93rem;
   }
 
   .sub-items li {
-    font-size: 0.92rem;
+    font-size: 0.85rem;
   }
 
   /* Korok positions are px-relative to a 300px photo, so keep that size */
