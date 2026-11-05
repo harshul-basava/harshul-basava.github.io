@@ -53,6 +53,34 @@ export default function Home() {
             </a>
           </li>
         </ul>
+        <p className="section-header">Writing</p>
+        <ul className="sub-items">
+          <li>
+            <a href="https://www.lesswrong.com/posts/KxbeqePFBooJteoeC/what-is-openai-s-mission-advisory-council-1" target="_blank" rel="noopener">
+              What is OpenAI's Mission Advisory Council?
+            </a>
+          </li>
+          <li>
+            <a href="https://www.lesswrong.com/posts/wiFv6LguphSxkzAnb/psa-we-can-do-better" target="_blank" rel="noopener">
+              PSA: We can do better
+            </a>
+          </li>
+          <li>
+            <a href="https://www.lesswrong.com/posts/oKxc8maZGtnzgpNzx/rerunning-ai-safety-papers-on-every-frontier-release-would-1" target="_blank" rel="noopener">
+              Rerunning AI safety papers on every frontier release would be pretty easy and valuable
+            </a>
+          </li>
+          <li>
+            <a href="https://www.lesswrong.com/posts/CfqLNt6jgb9xrixf4/arguments-for-and-against-me-dropping-out" target="_blank" rel="noopener">
+              Arguments for and against (me) dropping out
+            </a>
+          </li>
+          <li>
+            <a href="https://www.lesswrong.com/posts/DgLGD3A5CZXH7hbzP/georgia-tech-ai-safety-initiative-retrospective-2025-2026" target="_blank" rel="noopener">
+              Georgia Tech AI Safety Initiative Retrospective 2025-2026
+            </a>
+          </li>
+        </ul>
       </main>
 
       <div className="headshot-container">
