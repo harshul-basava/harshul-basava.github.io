@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Script from "next/script";
 import RockScene from "./RockScene";
@@ -13,12 +14,59 @@ declare global {
   }
 }
 
+const EMAIL = "harshul@gatech.edu";
+
 export default function Home() {
+  const [copied, setCopied] = useState(false);
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (copyTimer.current) clearTimeout(copyTimer.current);
+  }, []);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+    } catch {
+      // Fallback for browsers/contexts without the async clipboard API.
+      const ta = document.createElement("textarea");
+      ta.value = EMAIL;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    setCopied(true);
+    if (copyTimer.current) clearTimeout(copyTimer.current);
+    copyTimer.current = setTimeout(() => setCopied(false), 1800);
+  };
+
   return (
     <>
       <main>
         <h1>Harshul Basava</h1>
-        <p className="email">harshul [at] gatech [dot] edu</p>
+        <p className="email">
+          harshul [at] gatech [dot] edu
+          <span className="email-copy-wrap">
+            <button
+              type="button"
+              className="email-copy"
+              onClick={copyEmail}
+              aria-label="Copy email address"
+              title={copied ? "Copied!" : "Copy email"}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="M3.5 6.5 12 13l8.5-6.5" />
+              </svg>
+            </button>
+            <span className="email-copied" aria-live="polite">
+              {copied ? "copied!" : ""}
+            </span>
+          </span>
+        </p>
       </main>
 
       <div className="headshot-container">
