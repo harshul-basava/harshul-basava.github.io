@@ -256,12 +256,12 @@ h1 {
   display: inline-block;
 }
 
-/* "Copied!" pill: same look as the korok cursor tooltip. Sits below the icon,
-   right-aligned to it, so it never covers the name or reflows the line. */
+/* "Copied!" pill: same look as the korok cursor tooltip. Sits centered below
+   the icon, so it never covers the name or reflows the line. */
 .email-copied {
   position: absolute;
   top: calc(100% + 8px);
-  right: -6px;
+  left: 50%;
   z-index: 5;
   white-space: nowrap;
   pointer-events: none;
@@ -276,7 +276,7 @@ h1 {
   letter-spacing: 0.03em;
   line-height: 1.4;
   opacity: 0;
-  transform: translateY(-3px);
+  transform: translate(-50%, -3px);
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
@@ -285,14 +285,15 @@ h1 {
   content: "";
   position: absolute;
   bottom: 100%;
-  right: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   border: 5px solid transparent;
   border-bottom-color: var(--muted);
 }
 
 .email-copied.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
 .sr-only {
