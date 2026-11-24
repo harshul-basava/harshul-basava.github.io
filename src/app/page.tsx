@@ -55,15 +55,17 @@ export default function Home() {
               className="email-copy"
               onClick={copyEmail}
               aria-label="Copy email address"
-              title={copied ? "Copied!" : "Copy email"}
+              title="Copy email"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-                <rect x="3" y="5" width="18" height="14" rx="2" />
-                <path d="M3.5 6.5 12 13l8.5-6.5" />
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-7.47 4.67a1 1 0 0 1-1.06 0L4 8.2V6l8 5 8-5v2.2z" />
               </svg>
             </button>
-            <span className="email-copied" aria-live="polite">
-              {copied ? "copied!" : ""}
+            <span className={`email-copied${copied ? " show" : ""}`} aria-hidden="true">
+              Copied!
+            </span>
+            <span className="sr-only" aria-live="polite">
+              {copied ? "Email copied to clipboard" : ""}
             </span>
           </span>
         </p>

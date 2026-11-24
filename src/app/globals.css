@@ -225,9 +225,9 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  vertical-align: -0.15em;
-  margin-left: 0.45em;
-  padding: 0.15em;
+  vertical-align: -0.28em;
+  margin-left: 0.4em;
+  padding: 0.1em;
   background: none;
   border: none;
   border-radius: 4px;
@@ -237,8 +237,8 @@ h1 {
 }
 
 .email-copy svg {
-  width: 1em;
-  height: 1em;
+  width: 1.35em;
+  height: 1.35em;
 }
 
 .email-copy:hover,
@@ -256,16 +256,52 @@ h1 {
   display: inline-block;
 }
 
-/* Floats above the icon so it never reflows the email line. */
+/* "Copied!" pill: same look as the korok cursor tooltip. Sits below the icon,
+   right-aligned to it, so it never covers the name or reflows the line. */
 .email-copied {
   position: absolute;
-  left: calc(50% + 0.22em);
-  bottom: 100%;
-  transform: translateX(-50%);
+  top: calc(100% + 8px);
+  right: -6px;
+  z-index: 5;
   white-space: nowrap;
   pointer-events: none;
-  font-size: 0.6em;
-  color: var(--accent);
+  background: #0f2419;
+  color: var(--ink);
+  border: 1px solid var(--muted);
+  border-radius: 4px;
+  padding: 0.25rem 0.55rem;
+  font-family: var(--font-noto-sans-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* Small caret pointing up at the icon. */
+.email-copied::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  right: 16px;
+  border: 5px solid transparent;
+  border-bottom-color: var(--muted);
+}
+
+.email-copied.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 p {
