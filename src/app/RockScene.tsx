@@ -21,6 +21,7 @@ type Item = {
   href?: string;
   target?: string;
   modal?: boolean;
+  clickMessage?: string; // shown in the tooltip on click instead of navigating
   baseHeight: number; // px height at scale = 1 (width follows aspect ratio)
   x: number; // left, in scene coordinates
   y: number; // top, in scene coordinates
@@ -50,8 +51,7 @@ const DEFAULT_ITEMS: Item[] = [
     id: "resume",
     src: "/icons/resume.png",
     label: "Resume",
-    href: "/resume.pdf",
-    target: "_blank",
+    clickMessage: "Email me for my resume!",
     baseHeight: 96,
     x: -19,
     y: 132,
@@ -120,9 +120,16 @@ export default function RockScene() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hover, setHover] = useState<{ label: string; x: number; y: number } | null>(null);
   const [loaded, setLoaded] = useState(false);
+  // Item whose clickMessage is currently showing in place of its label.
+  const [clickedId, setClickedId] = useState<string | null>(null);
 
   const nodeRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const opRef = useRef<Op | null>(null);
+  const msgTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (msgTimer.current) clearTimeout(msgTimer.current);
+  }, []);
 
   // Load persisted placement + detect ?edit (runs once on mount; localStorage
   // is client-only so this can't be a lazy initializer without a hydration mismatch)
@@ -210,7 +217,22 @@ export default function RockScene() {
     (e: React.PointerEvent) => {
       const op = opRef.current;
       if (op && (op.type === "click" || op.type === "move") && !op.moved && !editMode) {
-        navigate(op.id);
+        const item = items.find((it) => it.id === op.id);
+        if (item?.clickMessage) {
+          setClickedId(item.id);
+          setHover({ label: item.clickMessage, x: e.clientX, y: e.clientY });
+          if (msgTimer.current) clearTimeout(msgTimer.current);
+          // Mouse: message stays until the cursor leaves the korok.
+          // Touch/pen: there is no hover-out, so hide it after a few seconds.
+          if (e.pointerType !== "mouse") {
+            msgTimer.current = setTimeout(() => {
+              setClickedId(null);
+              setHover(null);
+            }, 3000);
+          }
+        } else {
+          navigate(op.id);
+        }
       }
       opRef.current = null;
       try {
@@ -219,7 +241,7 @@ export default function RockScene() {
         /* ignore */
       }
     },
-    [editMode, navigate]
+    [editMode, navigate, items]
   );
 
   const startBody = (e: React.PointerEvent, item: Item) => {
@@ -356,10 +378,14 @@ export default function RockScene() {
               }}
               onPointerDown={(e) => startBody(e, item)}
               onMouseMove={(e) => {
-                if (!editMode && item.label) setHover({ label: item.label, x: e.clientX, y: e.clientY });
+                if (editMode || !item.label) return;
+                const label = clickedId === item.id && item.clickMessage ? item.clickMessage : item.label;
+                setHover({ label, x: e.clientX, y: e.clientY });
               }}
               onMouseLeave={() => {
-                if (!editMode) setHover(null);
+                if (editMode) return;
+                setHover(null);
+                setClickedId(null);
               }}
               aria-label={item.label}
             >
